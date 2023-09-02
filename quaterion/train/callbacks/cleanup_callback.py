@@ -22,11 +22,11 @@ class CleanupCallback(Callback):
             # If encoders were wrapped, unwrap them
             pl_module.unwrap_cache()
 
-            try:  # fix for pl>=1.9.0
-                trainer.reset_train_val_dataloaders()
-            except NotImplementedError:
-                trainer.reset_train_dataloader()
-                trainer.reset_test_dataloader()
+            # try:  # fix for pl>=1.9.0
+                # trainer.reset_train_val_dataloaders()
+            # except AttributeError:
+            trainer.reset_train_dataloader()
+            trainer.reset_test_dataloader()
 
             # Restore Data Loaders if they were modified for cache
             train_dataloader = trainer.train_dataloader.loaders
